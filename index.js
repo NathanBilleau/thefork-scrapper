@@ -26,6 +26,7 @@ const getData = async () => {
                 return restaurants
             })
 
+            await page.close()
             resolve(results)
         })
     })
