@@ -17,6 +17,7 @@ const getData = async () => {
                     return {
                         name: card.querySelector("h2 a").innerText,
                         link: card.querySelector("h2 a").href,
+                        category: card.querySelector(".css-18gsitc.enrzupw2")?.innerText.toLowerCase(),
                         address: card.querySelector(".content .css-rttism.eulusyj0")?.innerText.replace('\n', ' '),
                         price: parseInt(card.querySelector('.content .css-1qqp6e8.eulusyj0')?.innerText.replace(/^\D+/g, '')),
                         rate: parseFloat(card.querySelector('.content .css-13xokbo.e7dhrrp0 span')?.innerText.replace(',', '.')),
