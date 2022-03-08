@@ -34,8 +34,8 @@ const getData = async () => {
 
                         if (response?.features?.length > 0) {
                             geo = {
-                                longitude: response?.features[0]?.geometry?.coordinates[0],
-                                latitude: response?.features[0]?.geometry?.coordinates[1]
+                                latitude: response?.features[0]?.geometry?.coordinates[0],
+                                longitude: response?.features[0]?.geometry?.coordinates[1]
                             }
                         }
                     }
