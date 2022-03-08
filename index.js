@@ -17,10 +17,12 @@ const getData = async () => {
                 for (const card of cards) {
                     const address = card.querySelector(".content .css-rttism.eulusyj0")?.innerText.replace('\n', ' ')
                     const image = card.querySelector('img').src
+                    const price = parseInt(card.querySelector('.content .css-1qqp6e8.eulusyj0')?.innerText.replace(/^\D+/g, ''))
+                    const rate = parseFloat(card.querySelector('.content .css-13xokbo.e7dhrrp0 span')?.innerText.replace(',', '.'))
 
                     let geo = {
-                        x: null,
-                        y: null
+                        longitude: null,
+                        latitude: null
                     }
 
                     if (address) {
@@ -32,21 +34,20 @@ const getData = async () => {
 
                         if (response?.features?.length > 0) {
                             geo = {
-                                x: response?.features[0]?.geometry?.coordinates[0],
-                                y: response?.features[0]?.geometry?.coordinates[1]
+                                longitude: response?.features[0]?.geometry?.coordinates[0],
+                                latitude: response?.features[0]?.geometry?.coordinates[1]
                             }
                         }
                     }
 
-                    if (image && address) {
+                    if (image && address && price && rate && geo.longitude && geo.latitude) {
                         restaurants.push({
                             name: card.querySelector("h2 a").innerText,
                             link: card.querySelector("h2 a").href,
-                            category: card.querySelector(".css-18gsitc.enrzupw2")?.innerText.toLowerCase(),
                             address,
-                            geo,
-                            price: parseInt(card.querySelector('.content .css-1qqp6e8.eulusyj0')?.innerText.replace(/^\D+/g, '')),
-                            rate: parseFloat(card.querySelector('.content .css-13xokbo.e7dhrrp0 span')?.innerText.replace(',', '.')),
+                            ...geo,
+                            price,
+                            rate,
                             image
                         })
                     }
